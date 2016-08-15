@@ -1,25 +1,26 @@
 var events = require("events");
 // var litchMaker = Object.create(new theLitch.EventEmitter);
-//
-var litch = new events.EventEmitter();
+
 
 // console.log(litch);
 
-function makeANewOne(x) {
+function MakeANewOne(x) {
+    var zombies = this
     if ( x < 0) {
         return
     } else {
       var doom = x;
       setTimeout(function() {
-        doom--
-        litch.emit("ping", doom)
+        doom--;
+        zombies.emit("ping", doom);
+        new MakeANewOne(doom);
       }
       , 1000);
     }
 
 }
 
+MakeANewOne.prototype = new events.EventEmitter();
 
 
-module.exports.makeANewOne = makeANewOne;
-module.exports.litch = litch;
+module.exports.MakeANewOne = MakeANewOne;
